@@ -1,0 +1,24 @@
+{
+  "dataset": {
+    "original_dataset_directory": "./original-dataset",
+    "split_dataset_directory": "./dataset",
+    "train_dir": "./dataset/train",
+    "val_dir": "./dataset/val",
+    "test_dir": "./dataset/test",
+
+    "ratios": {
+      "train_ratio": 0.7,
+      "val_ratio": 0.2,
+      "test_ratio": 0.1
+    }
+  },
+  "dental-classifier": {
+    "api_name": "dental-classifier",
+    "controllers": {
+      "prefix": "/api/DentalClassifier"
+    }
+  },
+  "classify": {
+    "save_image_path": "./incoming-data/"
+  }
+}
