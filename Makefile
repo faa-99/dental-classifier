@@ -51,7 +51,7 @@ prepare: format lint test docs
 .PHONY: env-docker
 env-docker:
 	which poetry | grep . && echo 'poetry installed' || curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
-	. ${HOME}/.poetry/env && poetry env use python3.9 && poetry install
+	. ${HOME}/.poetry/env && poetry env use python3.10 && poetry install
 
 .PHONY: dev
 dev:
@@ -76,14 +76,9 @@ lint: env clean-pyc
 
 .PHONY: format
 format: env clean-pyc
+
 #	Format the code.
 	poetry run bash scripts/format.sh
-
-# ============================== Document =====================================
-
-.PHONY: docs
-docs: env
-	poetry run bash scripts/generate-docs.sh
 
 # ============================== Test =========================================
 
