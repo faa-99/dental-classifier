@@ -7,7 +7,7 @@ from tensorflow.keras.utils import image_dataset_from_directory
 
 def load_dataset(dataset_dir, batch_size, image_size):
     return image_dataset_from_directory(
-        dataset_dir, shuffle=True, image_size=image_size, batch_size=batch_size
+        dataset_dir, shuffle=False, image_size=image_size, batch_size=batch_size
     )
 
 

@@ -1,4 +1,6 @@
 import matplotlib
+import pandas as pd
+import seaborn as sns
 from matplotlib import pyplot as plt
 
 
@@ -29,3 +31,14 @@ def plot_accuracy_and_loss(history):
     plt.title("Training and Validation Loss")
     plt.xlabel("epoch")
     plt.savefig("Accuracy-Loss-Plot.png")
+
+
+def plot_confusion_matrix(cm):
+    sns.heatmap(cm, annot=True, cmap="Blues")
+    plt.savefig("Confusion-Matrix")
+
+
+def plot_class_report(clf_report):
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(pd.DataFrame(clf_report).iloc[:-1, :].T, annot=True, cmap="Blues")
+    plt.savefig("Classification-Report")
