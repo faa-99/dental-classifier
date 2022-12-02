@@ -18,6 +18,7 @@ numba = "^0.56.4"
 loguru = "^0.6.0"
 python-multipart = "^0.0.5"
 h5py = "^3.7.0"
+pydantic = "^1.10.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "7.1.1"

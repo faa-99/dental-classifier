@@ -1,7 +1,6 @@
 import json
 import pathlib
 
-import numpy as np
 import tensorflow as tf
 from fastapi import APIRouter
 

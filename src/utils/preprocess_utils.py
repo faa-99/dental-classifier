@@ -1,8 +1,8 @@
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras import Sequential, layers, models
 from tensorflow.keras.optimizers import Adam
-from tensorflow.keras.utils import image_dataset_from_directory
 from tensorflow.keras.optimizers.experimental import Adadelta, Adamax, RMSprop
+from tensorflow.keras.utils import image_dataset_from_directory
 
 
 def load_dataset(dataset_dir, batch_size, image_size):

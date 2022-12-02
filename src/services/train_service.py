@@ -39,4 +39,5 @@ class TrainService:
             verbose=1,
         )
         print(model.summary())
+
         return history.history
