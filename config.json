@@ -20,5 +20,8 @@
   },
   "classify": {
     "save_image_path": "./incoming-data/"
+  },
+  "model": {
+    "path": "./models/img_model.weights.best.hdf5"
   }
 }

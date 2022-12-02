@@ -19,11 +19,10 @@ help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo ""
 	@echo "  env		prepare environment and install required dependencies"
-	@echo "  dev        run local development containers to interact with local simulation"
 	@echo "  clean		remove all temp files along with docker images and docker-compose networks"
 	@echo "  clean-all	runs clean + removes the virtualenv"
 	@echo "  lint		run the code linters"
-	@echo "  format	reformat code"
+	@echo "  format	    reformat code"
 	@echo "  test		run all the tests"
 	@echo ""
 	@echo "Check the Makefile to know exactly what each target is doing."
@@ -46,28 +45,6 @@ prepare: format lint test docs
 	@echo "Ready to push your changes!"
 	@echo "==========================="
 
-# =============================== Docker =================================
-
-.PHONY: env-docker
-env-docker:
-	which poetry | grep . && echo 'poetry installed' || curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python3
-	. ${HOME}/.poetry/env && poetry env use python3.10 && poetry install
-
-.PHONY: dev
-dev:
-	docker-compose -f ${DOCKERCOMPOSE_FILE} up --build --force-recreate --remove-orphans --renew-anon-volumes
-
-.PHONY: stop
-stop:
-	docker-compose -f ${DOCKERCOMPOSE_FILE} stop
-
-# ============================== Simulation ==============================
-
-.PHONY: sim
-sim:
-#	Run the simulation.
-
-
 # ============================== Formatting/Linting ==============================
 
 .PHONY: lint
@@ -89,7 +66,7 @@ test: env
 # ============================== Clean =========================================
 
 .PHONY: clean
-clean: clean-pyc clean-test clean-docker
+clean: clean-pyc clean-test
 
 .PHONY: clean-all
 clean-all: clean
@@ -107,11 +84,4 @@ clean-test: # Remove tests and coverage artifacts
 	rm -rf .coverage
 	rm -rf htmlcov/
 	rm -rf .pytest_cache
-
-clean-docker:  # Remove docker image
-	if docker images | grep ${PROJECT_NAME}; then \
-	 	docker rmi -f ${PROJECT_NAME} || true;\
-	fi;
-	docker-compose -f ${DOCKERCOMPOSE_FILE} down --remove-orphans
-
 # ==============================================================================

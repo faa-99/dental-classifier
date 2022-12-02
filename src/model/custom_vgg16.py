@@ -1,21 +1,21 @@
 import tensorflow as tf
 from tensorflow.keras.losses import SparseCategoricalCrossentropy
-from tensorflow.keras.optimizers import Adam
 
 from src.model.vgg16 import get_vgg16_model
-from src.utils.preprocess_utils import get_augmentation_layers
+from src.utils.preprocess_utils import get_augmentation_layers, get_optimizer
 
 
-LEARNING_RATE = 0.00001
 NUM_CLASSES = 5
 IMG_SIZE = (224, 224)
 INPUT_SHAPE = IMG_SIZE + (3,)
 
 
-def create_model():
+def create_model(LEARNING_RATE: float, OPTIMIZER: str):
     data_augmentation = get_augmentation_layers()
 
     base_model = get_vgg16_model()
+
+    optimizer = get_optimizer(OPTIMIZER, LEARNING_RATE)
 
     model = tf.keras.Sequential(
         [
@@ -38,7 +38,7 @@ def create_model():
     )
 
     model.compile(
-        optimizer=Adam(learning_rate=LEARNING_RATE),
+        optimizer=optimizer,
         loss=SparseCategoricalCrossentropy(from_logits=True),
         metrics=["accuracy"],
     )

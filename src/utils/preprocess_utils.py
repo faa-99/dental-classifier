@@ -1,6 +1,8 @@
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras import Sequential, layers, models
+from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.utils import image_dataset_from_directory
+from tensorflow.keras.optimizers.experimental import Adadelta, Adamax, RMSprop
 
 
 def load_dataset(dataset_dir, batch_size, image_size):
@@ -35,7 +37,19 @@ def get_checkpoint_callback():
     :return:
     """
     return ModelCheckpoint(
-        filepath="./models/img_model.weights.best.hdf5",
+        filepath="./models/latest_model_weights.hdf5",
         verbose=1,
         save_best_only=True,
     )
+
+
+def get_optimizer(OPTIMIZER, LEARNING_RATE):
+    match OPTIMIZER:
+        case "Adam":
+            return Adam(learning_rate=LEARNING_RATE)
+        case "AdaMax":
+            return Adamax(learning_rate=LEARNING_RATE)
+        case "Adadelta":
+            return Adadelta(learning_rate=LEARNING_RATE)
+        case "RMSprop":
+            return RMSprop(learning_rate=LEARNING_RATE)
