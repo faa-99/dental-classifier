@@ -14,6 +14,9 @@ restorations, implants, appliances, and the size of the mouth and jaws.
 ## Endpoints
 ![Endpoints-Diagram](https://github.com/faa-99/dental-classifier/blob/main/assets/endpoints.png)
 
+## Results
+![Classification-Report](https://github.com/faa-99/dental-classifier/blob/main/assets/Classification-Report.png)
+
 ### Local Dev Poetry
 
 To prepare the environment using poetry and python3.10
