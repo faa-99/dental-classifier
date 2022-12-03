@@ -1,13 +1,14 @@
 import json
 import pathlib
 
+import tensorflow
+
 from src.model.custom_vgg16 import create_model
 from src.utils.preprocess_utils import (
     get_checkpoint_callback,
     get_early_stopping_callback,
     load_dataset,
 )
-
 
 BATCH_SIZE = 8
 IMG_SIZE = (224, 224)
@@ -29,13 +30,18 @@ class TrainService:
     def train(self, EPOCHS, LEARNING_RATE, OPTIMIZER):
         check_point_callback = get_checkpoint_callback()
         early_stop_callback = get_early_stopping_callback()
+        tensorboard_callback = tensorflow.keras.callbacks.TensorBoard(
+            log_dir='log_dir',
+            histogram_freq=1,
+            embeddings_freq=1,
+        )
         model = create_model(LEARNING_RATE, OPTIMIZER)
 
         history = model.fit(
             self.train_ds,
             validation_data=self.val_ds,
             epochs=EPOCHS,
-            callbacks=[check_point_callback, early_stop_callback],
+            callbacks=[check_point_callback, early_stop_callback, tensorboard_callback],
             verbose=1,
         )
         print(model.summary())
