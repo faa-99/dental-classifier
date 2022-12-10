@@ -19,7 +19,7 @@ help:
 	@echo "Please use 'make <target>' where <target> is one of"
 	@echo ""
 	@echo "  env		prepare environment and install required dependencies"
-	@echo "  clean		remove all temp files along with docker images and docker-compose networks"
+	@echo "  clean		remove all temp files"
 	@echo "  clean-all	runs clean + removes the virtualenv"
 	@echo "  lint		run the code linters"
 	@echo "  format	    reformat code"
